@@ -1,0 +1,7 @@
+html {background-color: #404040}
+.menu_box{
+	width: 300px;
+	position: fixed;
+	left:50%;
+	margin-left:-150px;
+}

@@ -1,0 +1,16 @@
+.button{
+	outline: 2px solid white;
+	width: 250px;
+	height: 50px;
+	display: inline-block;
+	border-radius: 4px;
+	color: white;
+	text-align: center;
+	margin: 30px 0 0 0;
+	text-decoration: none;
+}
+
+.button:hover{
+	outline-color: #e66232;
+	color: #e66232;
+}

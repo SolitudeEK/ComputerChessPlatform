@@ -1,0 +1,4 @@
+.cell{
+	float: left;
+	background-color:  var(--color-cell);
+}

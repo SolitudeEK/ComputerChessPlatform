@@ -1,0 +1,9 @@
+.board_pos{
+	margin: 40px 0 0 40px;
+}
+
+.figures_pos{
+	position: absolute;
+	left: 40px;
+	top: 40px;
+}
