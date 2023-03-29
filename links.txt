@@ -1,0 +1,3 @@
+https://chess.stackexchange.com/questions/17685/how-to-send-uci-messages-from-c-app-to-stockfish-on-android
+
+https://gitlab.com/ce72/dockfish 
