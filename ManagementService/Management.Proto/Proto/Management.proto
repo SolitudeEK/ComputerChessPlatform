@@ -1,0 +1,25 @@
+﻿syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Management.Proto";
+
+service ManagementGrpc{
+	rpc UploadEngine(EngineRequest) returns(google.protobuf.Empty);
+	rpc DownloadEngine(Name) returns(Engine);
+	rpc ApproveEngine(Name) returns (google.protobuf.Empty);
+	rpc GetEnginesToApprove(google.protobuf.Empty) returns (stream Name);
+}
+
+message EngineRequest{
+	string name = 1;
+	string fileName = 2;
+	bytes data = 3;
+}
+message Name{
+	string name = 1;
+}
+message Engine{
+	string name = 1;
+	bytes data = 2;
+}
+
