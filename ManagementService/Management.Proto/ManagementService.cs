@@ -2,6 +2,7 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,8 @@ namespace Management.Proto
             return Task.Run(() => new Empty());
         }
         public override Task GetEnginesToApprove(Empty request, IServerStreamWriter<Name> responseStream, ServerCallContext context)
-            => Task.FromResult(management.GetEngines().Select(value => responseStream.WriteAsync(new Name { Name_ = value })));
+            => Task.Run(() => management.GetEngines().ForEach(engine =>  responseStream.WriteAsync(new Name { Name_ = engine }) ));
+        
         
     }
 
