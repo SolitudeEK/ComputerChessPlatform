@@ -30,17 +30,20 @@ namespace EngineManagement
         }
         internal void Output(object sendingProcess, DataReceivedEventArgs outLine)
         {
-            if (outLine.Data.Contains("bestmove"))
+            if (outLine.Data != null)
             {
-                Moves.Add(outLine.Data.Split(' ')[1]);
-                if (outLine.Data.Split(' ')[1] != "0000" &&
-                    outLine.Data.Split(' ')[1] != "(none)")
+                if (outLine.Data.Contains("bestmove"))
                 {
-                    this.StartGame(); //TODO Chek if moves repeat
-                    MoveMade(this, null);
+                    Moves.Add(outLine.Data.Split(' ')[1]);
+                    if (outLine.Data.Split(' ')[1] != "0000" &&
+                        outLine.Data.Split(' ')[1] != "(none)")
+                    {
+                        this.StartGame(); //TODO Chek if moves repeat
+                        MoveMade(this, null);
+                    }
+                    else
+                        Finished?.TrySetResult(true);
                 }
-                else
-                    Finished?.TrySetResult(true);
             }
         }
 

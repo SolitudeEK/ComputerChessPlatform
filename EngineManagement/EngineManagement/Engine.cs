@@ -18,8 +18,8 @@ namespace EngineManagement
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
             process.StartInfo.RedirectStandardInput = true;
-            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
-            process.ErrorDataReceived += new DataReceivedEventHandler(OutputHandler);
+            //process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+            //process.ErrorDataReceived += new DataReceivedEventHandler(OutputHandler);
             process.Start();
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();

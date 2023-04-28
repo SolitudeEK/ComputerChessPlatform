@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,11 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Proto\google\**" />
+    <EmbeddedResource Remove="Proto\google\**" />
+    <None Remove="Proto\google\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Proto\EngineManagement.proto" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.52.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="7.0.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Proto\EngineManagement.proto" GrpcServices="Server" />
+    <Protobuf Include="Proto\EngineManagement.proto" GrpcServices="Both" />
   </ItemGroup>
 
 </Project>

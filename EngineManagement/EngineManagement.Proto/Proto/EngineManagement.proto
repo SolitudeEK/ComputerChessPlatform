@@ -1,10 +1,15 @@
 ﻿syntax = "proto3";
-import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
 
 option csharp_namespace = "EngineManagement.Proto";
 
 service EngineManagement{
-	rpc CreateGame (CreateGameRequest) returns (stream Move);
+	rpc CreateGame (CreateGameRequest) returns (stream Move){
+     option (google.api.http) = {
+      get: "/game/{nameOne}/{nameTwo}"
+		};
+	}
+
 }
 
 message CreateGameRequest{
