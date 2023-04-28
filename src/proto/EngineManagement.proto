@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "EngineManagement.Proto";
+
+service EngineManagement{
+	rpc CreateGame (CreateGameRequest) returns (stream Move);
+
+}
+
+message CreateGameRequest{
+	string nameOne = 1;
+	string nameTwo = 2;
+}
+
+message Move{
+	string From = 1;
+	string To = 2;
+	optional string Transform = 3;
+}

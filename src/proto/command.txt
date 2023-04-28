@@ -1,0 +1,4 @@
+protoc -I=. Management.proto --js_out=import_style=commonjs:output --grpc-web_out=import_style=commonjs,mode=grpcwebtext:output --plugin=protoc-gen-grpc-web=protoc-gen-grpc-web-1.4.2-windows-x86_64.exe
+
+
+protoc -I=. EngineManagement.proto --js_out=import_style=commonjs:output --grpc-web_out=import_style=commonjs,mode=grpcwebtext:output --plugin=protoc-gen-grpc-web=protoc-gen-grpc-web-1.4.2-windows-x86_64.exe

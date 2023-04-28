@@ -6,7 +6,7 @@ const Menu = () => {
     <div className={style.menu}>
       <div className={style.menu_box}>
         <Button text="start game" dest="/game"/>
-        <Button text="plug engine" dest="/menu"/>
+        <Button text="plug engine" dest="/plug"/>
         <Button text="statistics" dest="/menu"/>
       </div>
     </div>

@@ -1,0 +1,46 @@
+input, label {
+    display:block;
+
+}
+.engineName{
+  color: white;
+  position: relative;
+  margin-left: 50%;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  left: -100px;
+}
+.fileUpload{
+  border: 1px solid white !important;
+  position: relative;
+  margin-left: 50%;
+  left: -100px;
+  width: 200px;
+}
+.fileUpload:hover{
+  border: 1px solid #e66232 !important; 
+}
+.inputEngine{
+  margin-top: 10px;
+  background-color: #404040;
+  border: 1px solid white !important;
+  border-radius: 4px;
+  color: white;
+}
+.inputButton{
+  position: relative;
+  border: 1px solid white;
+  border-radius: 4px;
+  width: 100px;
+  margin-left: 50%;
+  left: -50px;
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.inputButton:hover{
+  border: 1px solid #e66232;
+  color: #e66232;
+}

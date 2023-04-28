@@ -1,5 +1,6 @@
 import Menu from "./pages/Menu"
 import Game from "./pages/Game"
+import Plug from "./pages/Plug"
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Routes>
           <Route path="/" element={<Menu />}/>
           <Route path="/game" element={<Game />}/>
+          <Route path="/plug" element={<Plug />}/>
       </Routes>
     </BrowserRouter>
     </div>
