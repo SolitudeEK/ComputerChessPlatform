@@ -6,5 +6,6 @@
         public string DownloadEngine(string name);
         public void ApproveEngine(string name);
         public List<string> GetEngines();
+        public List<string> GetEnginesInUse();
     }
 }

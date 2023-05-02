@@ -39,7 +39,7 @@ namespace Management.Proto
             return Task.Run(() => new Empty());
         }
         public override Task GetEnginesToApprove(Empty request, IServerStreamWriter<Name> responseStream, ServerCallContext context)
-            => Task.Run(() => management.GetEngines().ForEach(engine =>  responseStream.WriteAsync(new Name { Name_ = engine }) ));
+            { Console.WriteLine("as"); return Task.Run(() => management.GetEngines().ForEach(engine =>  responseStream.WriteAsync(new Name { Name_ = engine }) ));}
         
         
     }

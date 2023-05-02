@@ -9,6 +9,10 @@
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.52.0" />
     <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.52.0" />
+    <PackageReference Include="Grpc.AspNetCore.Web" Version="2.52.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
   </ItemGroup>
 	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
 		<None Include="appsettings.json" Link="appsettings.json" CopyToOutputDirectory="Always" />
@@ -17,6 +21,6 @@
 		<None Include="appsettingsLinux.json" Link="appsettings.json" CopyToOutputDirectory="Always" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\Management.Proto\Management.Proto.csproj" />
+	  <ProjectReference Include="..\Management.Api\Management.Api.csproj" />
 	</ItemGroup>
 </Project>

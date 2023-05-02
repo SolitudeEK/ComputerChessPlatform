@@ -24,5 +24,7 @@ namespace Management
             => storage.AddEngine(name, path);
         public List<string> GetEngines()
             => storage.GetEngines().Keys.ToList();
+        public List<string> GetEnginesInUse()
+            => storage2.GetEngines().Keys.ToList();
     }
 }
