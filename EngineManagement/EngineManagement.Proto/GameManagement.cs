@@ -21,7 +21,7 @@ namespace EngineManagement.Proto
             }
             game.MoveMade += OnListChanged;
             game.StartGame();
-            return Task.WhenAny(game.Finished.Task, Task.Delay(25000));
+            return Task.WhenAny(game.Finished.Task, Task.Delay(200000));
         }
 
 
