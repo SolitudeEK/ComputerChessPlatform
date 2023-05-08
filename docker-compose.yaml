@@ -21,6 +21,10 @@ services:
       - "5002:5002"
     volumes:
       - .nginx/:/etc/nginx/
+  front-end:
+      image: front_end
+      ports:
+        - "3000:3000"
 volumes:
   engines:
   info:
