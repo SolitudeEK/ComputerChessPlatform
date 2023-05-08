@@ -1,14 +1,15 @@
 import style from "../styles/pages/Game.module.css"
 import Board from "../chess/board/Board"
-import FenEncoder from "../chess/FenEncoder"
 import GameProcessor from "../logic/GameProcessor"
 import Figure from "../chess/Figure.js"
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-const Game = () => {
+const Game = (props) => {
     const getWidgth = () => {
         return Math.floor(Math.min(window.innerWidth, window.innerHeight) / 8) - 10;
     }
+    const location = useLocation();
 
     function checkCastling(from, to) {
         if (map.has('e1')) {
@@ -23,8 +24,8 @@ const Game = () => {
                 if (to === 'c1') {
                     map.delete('e1');
                     map.delete('a1');
-                    map.set('g1', new Figure('c1', 'K'));
-                    map.set('a1', new Figure('d1', 'R'));
+                    map.set('c1', new Figure('c1', 'K'));
+                    map.set('d1', new Figure('d1', 'R'));
                     return false;
                 }
             }
@@ -41,28 +42,29 @@ const Game = () => {
                 if (to === 'c8') {
                     map.delete('e8');
                     map.delete('a8');
-                    map.set('g8', new Figure('c1', 'k'));
-                    map.set('a8', new Figure('d1', 'r'));
+                    map.set('c8', new Figure('c8', 'k'));
+                    map.set('d8', new Figure('d8', 'r'));
                     return false;
                 }
             }
         }
         return true;
     }
-
-    const map = Init();
+    const map = init();
     const [figures, setFigures] = useState('');
     useEffect(() => {
         setFigures(Array.from(map.values()).map(obj => obj.toRender(getWidgth())));
-        console.log("game started");
-        var stream = new GameProcessor("komodo", "komodo");
+        var stream = new GameProcessor(location.state[0], location.state[1]);
         stream.on('data', function(response) {
             var from = response.getFrom();
             var to = response.getTo();
             if (checkCastling(from, to)) {
                 var type = map.get(from).getType();
-                if (type === null) {
-                    type = map.get(from).getType();
+                if (response.getTransform() !== "") {
+                    if (isUpperCase(type))
+                        type = response.getTransform().toUpperCase();
+                    else
+                        type = response.getTransform();
                 }
                 map.delete(from);
                 map.delete(to);
@@ -71,7 +73,6 @@ const Game = () => {
             setFigures(Array.from(map.values()).map(obj => obj.toRender(getWidgth())));
         });
         stream.on('end', function(end) {
-            //console.log(map)
         });
     }, []);
 
@@ -86,10 +87,9 @@ const Game = () => {
     </div>
     );
 }
-
 export default Game;
 
-function Init() {
+function init() {
     var map = new Map();
     //White pawns
     map.set('a2', new Figure('a2', 'P'));
@@ -130,11 +130,6 @@ function Init() {
     return map;
 }
 
-
-/*
-const getFigures = () => {
-    return FenEncoder.encode("rnbqkbnr/pppppQpp/8/8/8/8/PPPPPPPP/RNBQKBNR", getWidgth());
+function isUpperCase(letter) {
+    return (letter === letter.toUpperCase());
 }
-
-
-*/

@@ -1,18 +1,17 @@
 import style from "../../styles/pages/DragDropFile.module.css"
 import React, { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
-
+import API from "../../logic/API"
 const fileTypes = ["1-linux-bmi2", "04-x86-64-avx2"];
 
 function DragDropFile() {
   const [file, setFile] = useState(null);
-  const [input, setInput] = useState(null);
+  const [input, setInput] = useState("name");
   const handleChange = (file) => {
     setFile(file);
   };
   function sendEngine () {
-    console.log(file);
-    console.log(input);
+    API.upload(input, file);
   }
   return (
     <div>

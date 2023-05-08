@@ -1,7 +1,8 @@
-import Menu from "./pages/Menu"
-import Game from "./pages/Game"
-import CreateGame from "./pages/CreateGame"
-import Plug from "./pages/Plug"
+import Menu from "./pages/Menu";
+import Game from "./pages/Game";
+import CreateGame from "./pages/CreateGame";
+import Admin from "./pages/Admin";
+import Plug from "./pages/Plug";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 function App() {
@@ -10,9 +11,10 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<Menu />}/>
-          <Route path="/game" element={<Game />}/>
-          <Route path="/creategame" element={<CreateGame />}/>
+          <Route path="/game" element={<Game authed={true}/>}/>
+          <Route path="/creategame" element={<CreateGame authed={true}/>}/>
           <Route path="/plug" element={<Plug />}/>
+          <Route path="/admin" element={<Admin />}/>
       </Routes>
     </BrowserRouter>
     </div>
