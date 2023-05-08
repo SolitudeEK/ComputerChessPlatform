@@ -11,8 +11,8 @@ inspect:
   stage: inspect
   script:
     - dotnet new tool-manifest
-    - dotnet tool install JetBrains.ReSharper.GlobalTools
-    - dotnet jb inspectcode EngineManagement/EngineManagement.sln -o=/report
+    - dotnet tool install JetBrains.ReSharper.GlobalTools --version=2023.1.1
+    - dotnet jb inspectcode EngineManagement/EngineManagement.sln -o=/Reports/
     - dotnet tool restore
 
 deploydocker: 
