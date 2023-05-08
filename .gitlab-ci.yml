@@ -11,7 +11,7 @@ inspect:
   stage: inspect
   script:
     - dotnet new tool-manifest
-    - dotnet tool install JetBrains.ReSharper.GlobalTools --version 2020.3.0-*
+    - dotnet tool install JetBrains.ReSharper.GlobalTools
     - dotnet jb inspectcode EngineManagement/EngineManagement.sln -o=/report
     - dotnet tool restore
 
