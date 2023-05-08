@@ -12,7 +12,7 @@ inspect:
   script:
     - dotnet new tool-manifest
     - dotnet tool install JetBrains.ReSharper.GlobalTools --version=2023.1.1
-    - dotnet jb inspectcode ManagementService/ManagementService.sln -o=/ManagementReport.xml
+    - dotnet jb inspectcode ManagementService/ManagementService.sln -o=/ManagementReport
     - dotnet tool restore
 
 deploydocker: 
