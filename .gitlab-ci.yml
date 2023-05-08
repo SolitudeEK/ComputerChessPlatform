@@ -1,0 +1,8 @@
+
+stages:
+  - deploydocker
+
+deploydocker:       # This job runs in the build stage, which runs first.
+  stage: deploydocker
+  script:
+    - docker build . -t front_end
