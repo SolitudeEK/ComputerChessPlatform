@@ -11,9 +11,8 @@ inspect:
   stage: inspect
   script:
     - dotnet tool install -g JetBrains.ReSharper.GlobalTools
-    - export PATH="$PATH:/root/.dotnet/tools"
     - dotnet tool list -g
-    - InspectCode --no-swea --output=$REPORTS_DIR/resharper-results.xml EngineManagement.sln
+    - InspectCode --no-swea --output=/resharper-results.xml EngineManagement.sln
   artifacts:
     paths:
       - reports/
