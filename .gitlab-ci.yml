@@ -1,10 +1,22 @@
 stages:
     - test
+    - inspect
     - deploydocker
 test:
     stage: test
     script:
         - Write-Host "Hello, World!"
+
+inspect:
+  stage: inspect
+  script:
+    - dotnet tool install -g JetBrains.ReSharper.GlobalTools
+    - export PATH="$PATH:/root/.dotnet/tools"
+    - dotnet tool list -g
+    - InspectCode --no-swea --output=$REPORTS_DIR/resharper-results.xml EngineManagement.sln
+  artifacts:
+    paths:
+      - reports/
 
 deploydocker: 
     stage: deploydocker
