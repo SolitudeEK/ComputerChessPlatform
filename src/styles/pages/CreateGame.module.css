@@ -1,0 +1,10 @@
+.options{
+	width: 400px;
+	position: absolute;
+	left:50%;
+	top: 80px;
+	margin-left: -200px;
+}
+.buttonPos{
+	margin-left:75px;
+}

@@ -1,3 +1,4 @@
+import style from "../../styles/pages/Engine.module.css"
 import API from "../../logic/API";
 
 const Engine = (props) =>{
@@ -8,10 +9,10 @@ const Engine = (props) =>{
 		API.approveEngine(props.name);
 	}
 	return(
-		<div>
-			<div>{props.name} </div>
-			<div onClick={download}> Download </div>
-			<div onClick={approve}> Approve </div>
+		<div className = {style.engineElement}>
+			<div className= {style.engine} >{props.name} </div>
+			<div className= {style.engineButton} onClick={download}> Download </div>
+			<div className= {style.engineButton} onClick={approve}> Approve </div>
 		</div>
 	);
 }

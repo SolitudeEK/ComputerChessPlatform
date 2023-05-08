@@ -1,0 +1,20 @@
+.engine{
+	color: white;
+	display: inline-block; 
+	margin:  0 48px 2px 28px;
+	font-style: italic;
+	font-size: 24px;
+}
+.engineButton{
+	color: white;
+	display: inline-block;
+	margin:  0 8px 2px 8px ; 
+	font-size: 18px;
+}
+.engineButton:hover{
+	color: #e66232;
+}
+.engineElement{
+	border-bottom: 1px solid white;
+	width: 300px;
+}

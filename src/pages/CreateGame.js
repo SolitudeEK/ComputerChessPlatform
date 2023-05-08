@@ -3,6 +3,7 @@ import API from "../logic/API";
 import Select from 'react-select';
 import Convertor from "./utils/Convertor";
 import Button from "./components/Button";
+import style from "../styles/pages/CreateGame.module.css"
 
 const CreateGame = () => {
     const [engines, setEngines] = useState([]);
@@ -20,16 +21,19 @@ const CreateGame = () => {
         setTwo(e.label);
     }
     return (
-        <div>
-          <Select
-            placeholder="Select Option"
-            options={engines}
-            onChange={handleChangeOne}/>
-          <Select
-            placeholder="Select Option"
-            options={engines}
-            onChange={handleChangeTwo}/>
-            <Button text="start" dest="/game" data={[one, two]} />
+        <div className={style.options}>
+            <Select 
+                placeholder="Select Option"
+                options={engines}
+                onChange={handleChangeOne}/>
+            <h1/>
+            <Select
+                placeholder="Select Option"
+                options={engines}
+                onChange={handleChangeTwo}/>
+            <div className={style.buttonPos}>
+                <Button text="start" dest="/game" data={[one, two]} />
+            </div>
         </div>
     );
 }
