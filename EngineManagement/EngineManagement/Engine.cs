@@ -43,7 +43,7 @@ namespace EngineManagement
         public void Move(string moves)
         {
             streamWriter.WriteLine($"position startpos moves {moves}");
-            streamWriter.WriteLine("go movetime 300");
+            streamWriter.WriteLine("go movetime 100");
 
         }
     }

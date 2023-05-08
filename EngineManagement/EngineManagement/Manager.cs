@@ -11,7 +11,7 @@ namespace EngineManagement
         private Engine playerOne { get; set; }
         private Engine playerTwo { get; set; }
         private IStorage storage { get; set; }
-        private IList<string> moves { get; set; }
+        private IList<string> Moves { get; set; }
         public event EventHandler MoveMade;
         public TaskCompletionSource<bool> Finished { get; set; }
         public Manager(IStorage storage)
@@ -20,7 +20,7 @@ namespace EngineManagement
         }
         public void CreateGame(string firstEngine, string secondEngine)
         {
-            moves = new List<string>();
+            Moves = new List<string>();
             Finished = new TaskCompletionSource<bool>();
             playerOne = new Engine(storage.GetEnginePath(firstEngine));
             playerTwo = new Engine(storage.GetEnginePath(secondEngine));
@@ -34,17 +34,12 @@ namespace EngineManagement
             {
                 if (outLine.Data.Contains("bestmove"))
                 {
-                    moves.Add(outLine.Data.Split(' ')[1]);
+                    Moves.Add(outLine.Data.Split(' ')[1]);
                     if (outLine.Data.Split(' ')[1] != "0000" &&
                         outLine.Data.Split(' ')[1] != "(none)")
                     {
-                        if (!Repeated())
-                        {
-                            this.StartGame();
-                            MoveMade(this, null);
-                        }
-                        else
-                            Finished?.TrySetResult(true);
+                        this.StartGame(); //TODO Chek if moves repeat
+                        MoveMade(this, null);
                     }
                     else
                         Finished?.TrySetResult(true);
@@ -53,25 +48,15 @@ namespace EngineManagement
         }
 
         public string GetLastMove()
-            => moves.Last();
+            => Moves.Last();
 
         public void StartGame()
         {
-            if (moves.Count % 2 == 0)
-                playerOne.Move(string.Join(" ", moves));
+            if (Moves.Count % 2 == 0)
+                playerOne.Move(string.Join(" ", Moves));
             else
-                playerTwo.Move(string.Join(" ", moves));
+                playerTwo.Move(string.Join(" ", Moves));
         }
-
-        private bool Repeated()
-        {
-            int num = moves.Count - 1;
-            if (num > 5)
-                return moves[num] == moves[num - 2] && moves[num] == moves[num - 4]
-                && moves[num - 1] == moves[num - 3] && moves[num - 1] == moves[num - 5];
-            return false;
-        }
-
     }
 }
 
