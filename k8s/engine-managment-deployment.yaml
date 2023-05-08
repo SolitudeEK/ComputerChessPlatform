@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: engine-managment
+  name: chess-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: engine-managment
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: engine-managment
+    spec:
+      containers:
+        - name: engine-service
+          image: engine_managment:latest
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: IfNotPresent
+          resources: {}
+          volumeMounts:
+            - mountPath: /app/info/
+              name: info
+            - mountPath: /app/engines/
+              name: engines
+      restartPolicy: Always
+      volumes:
+        - name: info
+          persistentVolumeClaim:
+            claimName: info
+        - name: engines
+          persistentVolumeClaim:
+            claimName: engines
+status: {}
