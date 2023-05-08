@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using System.Reflection;
-using Utils;
 
 namespace Host
 {
@@ -10,9 +8,9 @@ namespace Host
         public static void Main(string[] args)
         {
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            Environment.CurrentDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
+            Console.WriteLine(Environment.OSVersion.ToString());
             IWebHost host = CreateWebHostBuilder(args).Build();
-            Console.WriteLine("Service started");
             host.Run();
         }
 

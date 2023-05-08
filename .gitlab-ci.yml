@@ -1,0 +1,13 @@
+stages:
+    - test
+    - deploydocker
+test:
+    stage: test
+    script:
+        - Write-Host "Hello, World!"
+
+deploydocker: 
+    stage: deploydocker
+    script:
+        - cd EngineManagement
+        - ./build_services.bat
