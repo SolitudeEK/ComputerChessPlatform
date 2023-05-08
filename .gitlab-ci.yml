@@ -12,7 +12,7 @@ inspect:
   script:
     - dotnet new tool-manifest
     - dotnet tool install JetBrains.ReSharper.GlobalTools --version=2023.1.1
-    - dotnet jb inspectcode EngineManagement/EngineManagement.sln -o=/Reports/
+    - dotnet jb inspectcode EngineManagement/EngineManagement.sln -o=/Game_Reports.xml
     - dotnet tool restore
 
 deploydocker: 
