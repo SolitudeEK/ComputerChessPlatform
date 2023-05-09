@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Management.Api
 {
@@ -18,24 +20,30 @@ namespace Management.Api
             this.management = management;
             path = configuration.GetSection("pathToSave").Value;
         }
+
         [Route("newengines")]
         [HttpGet]
+        [Authorize(Policy = "Admin")]
         public IActionResult GetEngines()
             => CreatedAtAction(nameof(GetEngines), new { engines = management.GetEngines() });
+
         [Route("engines")]
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetEnginesInUse()
-    => CreatedAtAction(nameof(GetEnginesInUse), new { engines = management.GetEnginesInUse() });
+            => CreatedAtAction(nameof(GetEnginesInUse), new { engines = management.GetEnginesInUse() });
+
         [Route("approve/{name}")]
         [HttpPost]
-        public async Task<IActionResult> Approve(string name)
+        [Authorize(Policy = "Admin")]
+        public IActionResult Approve(string name)
         {
             management.ApproveEngine(name);
             return Ok();
         }
         [Route("upload/{name}")]
         [HttpPost]
-        public async Task<IActionResult> UploadEnginr(IFormFile file, string name)
+        public async Task<IActionResult> UploadEngine(IFormFile file, string name)
         {
             string filePath = Path.Combine(path, file.FileName);
             using (Stream fileStream = new FileStream(filePath, FileMode.Create))
@@ -47,6 +55,7 @@ namespace Management.Api
         }
         [Route("download/{fileName}")]
         [HttpGet]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Download(string fileName)
         {
             var filePath = management.DownloadEngine(fileName);
