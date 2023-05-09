@@ -1,0 +1,46 @@
+import React from "react";
+import { useKeycloak } from "@react-keycloak/web";
+import API from "../../logic/API";
+
+const Nav = () => {
+ const { keycloak, initialized } = useKeycloak();
+
+if(keycloak.authenticated){
+  API.setToken(keycloak.token);
+}
+ return (
+   <div>
+     <div className="top-0 w-full flex flex-wrap">
+         <nav className="flex justify-between bg-gray-200 text-blue-800 w-screen">
+           <div className="px-5 xl:px-12 py-6 flex w-full items-center">
+             <div className="hidden xl:flex items-center space-x-5">
+               <div className="hover:text-gray-200">
+                 {!keycloak.authenticated && (
+                   <button
+                     type="button"
+                     className="text-blue-800"
+                     onClick={() => keycloak.login()}
+                   >
+                     Login
+                   </button>
+                 )}
+
+                 {!!keycloak.authenticated && (
+                   <button
+                     type="button"
+                     className="text-blue-800"
+                     onClick={() => keycloak.logout()}
+                   >
+                     Logout ({keycloak.tokenParsed.preferred_username})
+                   </button>
+                 )}
+               </div>
+             </div>
+           </div>
+         </nav>
+     </div>
+   </div>
+ );
+};
+
+export default Nav;

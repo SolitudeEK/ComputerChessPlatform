@@ -4,6 +4,9 @@ class API {
     static async getEnginesInUse() {
         return await axios.get(config.API_URL + "/management/engines");
     }
+    static setToken(token){
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    }
     static async upload(name, file) {
         const formData = new FormData();
         formData.append('file', file);
@@ -15,6 +18,7 @@ class API {
             });
     }
     static async getEnginesToApprove() {
+
         return await axios.get(config.API_URL + "/management/newengines");
     }
     static async downloadEngine(name) {
