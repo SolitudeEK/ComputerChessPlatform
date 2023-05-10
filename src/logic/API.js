@@ -2,6 +2,8 @@ import config from "./config.json";
 import axios from 'axios';
 class API {
     static async getEnginesInUse() {
+        console.log("213");
+        console.log(axios.defaults.headers.common['Authorization']);
         return await axios.get(config.API_URL + "/management/engines");
     }
     static setToken(token){
@@ -18,7 +20,6 @@ class API {
             });
     }
     static async getEnginesToApprove() {
-
         return await axios.get(config.API_URL + "/management/newengines");
     }
     static async downloadEngine(name) {

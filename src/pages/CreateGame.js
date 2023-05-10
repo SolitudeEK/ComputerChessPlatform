@@ -10,6 +10,7 @@ const CreateGame = () => {
     const [one, setOne] = useState("");
     const [two, setTwo] = useState("");
     useEffect(() => {
+        console.log("23");
         API.getEnginesInUse().then(function(res) {
             setEngines(Convertor.toOptions(res.data.engines))
         });
