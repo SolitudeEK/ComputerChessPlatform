@@ -1,12 +1,12 @@
-﻿using System.Security.Claims;
-using Keycloak.AuthServices.Authentication;
-using Keycloak.AuthServices.Authorization;
+﻿using Keycloak.AuthServices.Authentication;
 using Management;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using StorageManager;
+using System.Security.Claims;
 
 
 namespace Host
@@ -19,20 +19,22 @@ namespace Host
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            IdentityModelEventSource.ShowPII = true;
             services.AddLogging();
-            services.AddKeycloakAuthentication(Configuration, KeycloakAuthenticationOptions.Section);
-            services.AddControllers();
-            services.AddEndpointsApiExplorer();
+            services.AddKeycloakAuthentication(Configuration, KeycloakAuthenticationOptions.Section, o => {
+                o.TokenValidationParameters.ValidIssuer = Configuration.GetSection("issuer").Value;
+            });
             services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
             services.AddAuthorization(o =>
             {
                 o.AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.Role, "app_admin"));
                 o.AddPolicy("User", policy => policy.RequireClaim(ClaimTypes.Role, "app_user"));
             });
+            services.AddControllers();
+            services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>
             {
                 var securityScheme = new OpenApiSecurityScheme
@@ -90,7 +92,6 @@ namespace Host
             app.UseHttpLogging();
 
         }
-
     }
     public class ClaimsTransformer : IClaimsTransformation
     {
@@ -105,7 +106,7 @@ namespace Host
                 {
                     foreach (var role in realmAccessAsDict["roles"])
                     {
-                        Console.WriteLine(role);
+                        
                         claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role));
                     }
                 }

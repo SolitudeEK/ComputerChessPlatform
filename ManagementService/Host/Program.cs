@@ -19,7 +19,6 @@ namespace Host
                         options =>
                         {
                             options.ListenAnyIP(Startup.PORT);
-                            //options.ListenAnyIP(Startup.PORT, o => o.Protocols = HttpProtocols.Http1AndHttp2);
                         })
             .UseStartup<Startup>()
             .UseUrls($"http://*:{Startup.PORT}");
