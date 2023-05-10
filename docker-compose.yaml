@@ -15,6 +15,8 @@ services:
     volumes:
       - .info/:/app/info/
       - .engines/:/app/engines/
+    networks: 
+      - mynetwork
   load-balancer:
     image: nginx:latest
     ports:
@@ -33,6 +35,8 @@ services:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
+    networks: 
+      - mynetwork
     ports:
       - 5432:5432
   keycloak:
@@ -48,9 +52,14 @@ services:
       KEYCLOAK_PASSWORD: password            
     ports:
       - 5003:8080
+    networks: 
+      - mynetwork
     depends_on:
       - postgres
 volumes:
   engines:
   info:
   postgres_data:
+networks:
+  mynetwork:
+     name: mynetwork
