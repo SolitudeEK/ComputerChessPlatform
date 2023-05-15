@@ -4,4 +4,5 @@ html {background-color: #404040}
 	position: fixed;
 	left:50%;
 	margin-left:-150px;
+	margin-top: 36px;
 }

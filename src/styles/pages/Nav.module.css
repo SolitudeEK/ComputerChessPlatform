@@ -1,0 +1,17 @@
+.log{
+	background-color: white;
+	border: solid 2px white;
+	border-radius: 4px;
+	font-size: 14px;
+	color: #e66232;
+}
+.bar{
+	position: fixed;
+	width: 100%;
+	height: 36px;
+	background-color: #e66232;
+}
+.logbut{
+	float: right;
+	margin: 5px;
+}
