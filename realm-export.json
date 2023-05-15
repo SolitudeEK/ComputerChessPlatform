@@ -27,7 +27,7 @@
   "oauth2DevicePollingInterval": 5,
   "enabled": true,
   "sslRequired": "external",
-  "registrationAllowed": false,
+  "registrationAllowed": true,
   "registrationEmailAsUsername": false,
   "rememberMe": false,
   "verifyEmail": false,
@@ -51,9 +51,6 @@
         "composite": true,
         "composites": {
           "client": {
-            "front_end": [
-              "user"
-            ],
             "back_end": [
               "user"
             ]
@@ -70,9 +67,6 @@
         "composites": {
           "client": {
             "react_auth": [
-              "admin"
-            ],
-            "front_end": [
               "admin"
             ],
             "back_end": [
@@ -348,26 +342,6 @@
         }
       ],
       "security-admin-console": [],
-      "front_end": [
-        {
-          "id": "a92aa5ee-8f86-43ed-87ff-93a77e47597c",
-          "name": "admin",
-          "description": "Client admin role",
-          "composite": false,
-          "clientRole": true,
-          "containerId": "2fb2a5b0-cba9-4951-81b6-f0b3d51e28c2",
-          "attributes": {}
-        },
-        {
-          "id": "f04e3f6b-7b18-4388-9339-6b42baee3e9f",
-          "name": "user",
-          "description": "default user",
-          "composite": false,
-          "clientRole": true,
-          "containerId": "2fb2a5b0-cba9-4951-81b6-f0b3d51e28c2",
-          "attributes": {}
-        }
-      ],
       "admin-cli": [],
       "account-console": [],
       "back_end": [
@@ -773,20 +747,6 @@
           }
         },
         {
-          "id": "b2bbf5ee-5376-4a66-bbd0-ad75412e4281",
-          "name": "role",
-          "protocol": "openid-connect",
-          "protocolMapper": "oidc-usermodel-realm-role-mapper",
-          "consentRequired": false,
-          "config": {
-            "id.token.claim": "true",
-            "access.token.claim": "true",
-            "jsonType.label": "String",
-            "multivalued": "true",
-            "userinfo.token.claim": "true"
-          }
-        },
-        {
           "id": "bd69905a-f618-46a4-bf19-b7a335b90159",
           "name": "Client ID",
           "protocol": "openid-connect",
@@ -923,86 +883,6 @@
       ]
     },
     {
-      "id": "2fb2a5b0-cba9-4951-81b6-f0b3d51e28c2",
-      "clientId": "front_end",
-      "surrogateAuthRequired": false,
-      "enabled": true,
-      "alwaysDisplayInConsole": false,
-      "clientAuthenticatorType": "client-secret",
-      "redirectUris": [
-        "http://localhost:3000/*"
-      ],
-      "webOrigins": [],
-      "notBefore": 0,
-      "bearerOnly": false,
-      "consentRequired": false,
-      "standardFlowEnabled": true,
-      "implicitFlowEnabled": false,
-      "directAccessGrantsEnabled": true,
-      "serviceAccountsEnabled": false,
-      "publicClient": true,
-      "frontchannelLogout": false,
-      "protocol": "openid-connect",
-      "attributes": {
-        "id.token.as.detached.signature": "false",
-        "saml.assertion.signature": "false",
-        "saml.force.post.binding": "false",
-        "saml.multivalued.roles": "false",
-        "saml.encrypt": "false",
-        "oauth2.device.authorization.grant.enabled": "false",
-        "backchannel.logout.revoke.offline.tokens": "false",
-        "saml.server.signature": "false",
-        "saml.server.signature.keyinfo.ext": "false",
-        "use.refresh.tokens": "true",
-        "exclude.session.state.from.auth.response": "false",
-        "oidc.ciba.grant.enabled": "false",
-        "saml.artifact.binding": "false",
-        "backchannel.logout.session.required": "true",
-        "client_credentials.use_refresh_token": "false",
-        "saml_force_name_id_format": "false",
-        "require.pushed.authorization.requests": "false",
-        "saml.client.signature": "false",
-        "tls.client.certificate.bound.access.tokens": "false",
-        "saml.authnstatement": "false",
-        "display.on.consent.screen": "false",
-        "saml.onetimeuse.condition": "false"
-      },
-      "authenticationFlowBindingOverrides": {},
-      "fullScopeAllowed": true,
-      "nodeReRegistrationTimeout": -1,
-      "protocolMappers": [
-        {
-          "id": "d985816d-db0f-4aeb-aed7-09227738fde9",
-          "name": "roles",
-          "protocol": "openid-connect",
-          "protocolMapper": "oidc-usermodel-client-role-mapper",
-          "consentRequired": false,
-          "config": {
-            "multivalued": "true",
-            "userinfo.token.claim": "true",
-            "id.token.claim": "true",
-            "access.token.claim": "true",
-            "claim.name": "roles",
-            "jsonType.label": "String",
-            "usermodel.clientRoleMapping.clientId": "front_end"
-          }
-        }
-      ],
-      "defaultClientScopes": [
-        "web-origins",
-        "client_roles_front_end",
-        "roles",
-        "profile",
-        "email"
-      ],
-      "optionalClientScopes": [
-        "address",
-        "phone",
-        "offline_access",
-        "microprofile-jwt"
-      ]
-    },
-    {
       "id": "e79ca08d-19e2-417b-86a0-aec0cc38303d",
       "clientId": "react_auth",
       "rootUrl": "http://localhost:3000/",
@@ -1028,10 +908,10 @@
       "frontchannelLogout": false,
       "protocol": "openid-connect",
       "attributes": {
-        "id.token.as.detached.signature": "false",
         "saml.assertion.signature": "false",
-        "saml.force.post.binding": "false",
+        "id.token.as.detached.signature": "false",
         "saml.multivalued.roles": "false",
+        "saml.force.post.binding": "false",
         "saml.encrypt": "false",
         "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false",
@@ -1044,9 +924,9 @@
         "backchannel.logout.session.required": "true",
         "client_credentials.use_refresh_token": "false",
         "saml_force_name_id_format": "false",
-        "require.pushed.authorization.requests": "false",
         "saml.client.signature": "false",
         "tls.client.certificate.bound.access.tokens": "false",
+        "require.pushed.authorization.requests": "false",
         "saml.authnstatement": "false",
         "display.on.consent.screen": "false",
         "saml.onetimeuse.condition": "false"
@@ -1733,25 +1613,6 @@
         }
       },
       {
-        "id": "1b5224e9-3c04-4dd4-921d-62ab690a883a",
-        "name": "Allowed Protocol Mapper Types",
-        "providerId": "allowed-protocol-mappers",
-        "subType": "authenticated",
-        "subComponents": {},
-        "config": {
-          "allowed-protocol-mapper-types": [
-            "oidc-usermodel-attribute-mapper",
-            "saml-user-property-mapper",
-            "oidc-full-name-mapper",
-            "saml-user-attribute-mapper",
-            "saml-role-list-mapper",
-            "oidc-address-mapper",
-            "oidc-usermodel-property-mapper",
-            "oidc-sha256-pairwise-sub-mapper"
-          ]
-        }
-      },
-      {
         "id": "fbe8c9df-444c-4594-90bb-1411d2d42941",
         "name": "Allowed Client Scopes",
         "providerId": "allowed-client-templates",
@@ -1779,6 +1640,37 @@
         }
       },
       {
+        "id": "118d02b8-9a34-4623-aed6-26df5474488e",
+        "name": "Allowed Client Scopes",
+        "providerId": "allowed-client-templates",
+        "subType": "anonymous",
+        "subComponents": {},
+        "config": {
+          "allow-default-scopes": [
+            "true"
+          ]
+        }
+      },
+      {
+        "id": "1b5224e9-3c04-4dd4-921d-62ab690a883a",
+        "name": "Allowed Protocol Mapper Types",
+        "providerId": "allowed-protocol-mappers",
+        "subType": "authenticated",
+        "subComponents": {},
+        "config": {
+          "allowed-protocol-mapper-types": [
+            "oidc-usermodel-attribute-mapper",
+            "saml-user-property-mapper",
+            "oidc-full-name-mapper",
+            "saml-user-attribute-mapper",
+            "saml-role-list-mapper",
+            "oidc-address-mapper",
+            "oidc-usermodel-property-mapper",
+            "oidc-sha256-pairwise-sub-mapper"
+          ]
+        }
+      },
+      {
         "id": "98833eeb-3e3a-4732-aeec-62735e9e9989",
         "name": "Max Clients Limit",
         "providerId": "max-clients",
@@ -1799,22 +1691,18 @@
         "config": {}
       },
       {
-        "id": "118d02b8-9a34-4623-aed6-26df5474488e",
-        "name": "Allowed Client Scopes",
-        "providerId": "allowed-client-templates",
-        "subType": "anonymous",
-        "subComponents": {},
-        "config": {
-          "allow-default-scopes": [
-            "true"
-          ]
-        }
-      },
-      {
         "id": "6f42980d-ccb7-4001-98ab-387bc8b4fae8",
         "name": "Full Scope Disabled",
         "providerId": "scope",
         "subType": "anonymous",
+        "subComponents": {},
+        "config": {}
+      }
+    ],
+    "org.keycloak.userprofile.UserProfileProvider": [
+      {
+        "id": "1d6ff903-a39f-4b3a-8ebd-75f5c8211bbd",
+        "providerId": "declarative-user-profile",
         "subComponents": {},
         "config": {}
       }
@@ -1846,17 +1734,6 @@
         }
       },
       {
-        "id": "44aa22c7-7e64-4b4c-a018-2c6b64b513d1",
-        "name": "aes-generated",
-        "providerId": "aes-generated",
-        "subComponents": {},
-        "config": {
-          "priority": [
-            "100"
-          ]
-        }
-      },
-      {
         "id": "65d65882-7e41-468f-8b31-32f7c9112a83",
         "name": "rsa-enc-generated",
         "providerId": "rsa-enc-generated",
@@ -1867,6 +1744,17 @@
           ],
           "algorithm": [
             "RSA-OAEP"
+          ]
+        }
+      },
+      {
+        "id": "44aa22c7-7e64-4b4c-a018-2c6b64b513d1",
+        "name": "aes-generated",
+        "providerId": "aes-generated",
+        "subComponents": {},
+        "config": {
+          "priority": [
+            "100"
           ]
         }
       }
@@ -2548,7 +2436,11 @@
     "cibaAuthRequestedUserHint": "login_hint",
     "oauth2DeviceCodeLifespan": "600",
     "oauth2DevicePollingInterval": "5",
+    "clientOfflineSessionMaxLifespan": "0",
+    "clientSessionIdleTimeout": "0",
     "parRequestUriLifespan": "60",
+    "clientSessionMaxLifespan": "0",
+    "clientOfflineSessionIdleTimeout": "0",
     "cibaInterval": "5"
   },
   "keycloakVersion": "16.1.1",
