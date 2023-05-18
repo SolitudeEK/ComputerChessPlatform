@@ -19,7 +19,7 @@ const Menu = () => {
         <div className={style.menu}>
       <div className={style.menu_box}>
         <Button text="start game" dest="/creategame"/>
-        <Button text="plug engine" dest="/plug"/>
+        {renderPlug()}
         <Button text="statistics" dest="/menu"/>
         {renderAdmin()}
       </div>
