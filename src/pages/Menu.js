@@ -11,7 +11,7 @@ const Menu = () => {
     }
     const renderPlug = () => {
         if (keycloak.authenticated)
-            return (<Button text="engine manager" dest="/admin"/>);
+            return (<Button text="plug engine" dest="/plug"/>);
         else
             return null;
     }
