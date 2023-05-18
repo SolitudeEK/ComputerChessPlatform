@@ -9,6 +9,12 @@ const Menu = () => {
         else
             return null;
     }
+    const renderPlug = () => {
+        if (keycloak.authenticated)
+            return (<Button text="engine manager" dest="/admin"/>);
+        else
+            return null;
+    }
     return (
         <div className={style.menu}>
       <div className={style.menu_box}>
