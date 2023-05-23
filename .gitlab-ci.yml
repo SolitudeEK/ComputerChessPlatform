@@ -21,6 +21,9 @@ deploydocker:
     script:
         - cd ManagementService
         - ./build_services.bat
+        
+before_script:
+  - cd ManagementService
 include:
   - template: Security/Dependency-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
