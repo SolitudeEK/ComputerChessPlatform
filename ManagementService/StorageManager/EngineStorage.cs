@@ -15,7 +15,11 @@ namespace StorageManager
         public string GetEnginePath(string name)
         {
             string json = File.ReadAllText(filePath);
-            return JObject.Parse(json)[name].ToString();
+            try
+            {
+                return JObject.Parse(json)[name].ToString();
+            }
+            catch { return null; }
         }
 
         public Dictionary<string, string> GetEngines()

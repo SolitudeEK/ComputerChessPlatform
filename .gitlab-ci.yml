@@ -5,7 +5,7 @@ stages:
 test:
     stage: test
     script:
-        - Write-Host "Hello, World!"
+        - dotnet test ManagementService/ManagementService.sln
 
 inspect:
   stage: inspect
