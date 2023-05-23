@@ -6,20 +6,19 @@ stages:
 test:
     stage: test
     script:
-        - dotnet test ManagementService/ManagementService.sln
+        - dotnet test ManagementService.sln
 
 inspect:
   stage: inspect
   script:
     - dotnet new tool-manifest
     - dotnet tool install JetBrains.ReSharper.GlobalTools --version=2023.1.1
-    - dotnet jb inspectcode ManagementService/ManagementService.sln -o=/ManagementReport
+    - dotnet jb inspectcode ManagementService.sln -o=/ManagementReport
     - dotnet tool restore
 
 deploydocker: 
     stage: deploydocker
     script:
-        - cd ManagementService
         - ./build_services.bat
         
 before_script:
