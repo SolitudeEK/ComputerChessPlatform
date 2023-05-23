@@ -2,9 +2,7 @@ stages:
     - test
     - inspect
     - deploydocker
-include: 
-    - tempalte: Security/Dependency-Scanning.gitlab-ci.yml
-    - tempalte: Security/SAST.gitlab-ci.yml
+
 test:
     stage: test
     script:
@@ -23,3 +21,6 @@ deploydocker:
     script:
         - cd ManagementService
         - ./build_services.bat
+include:
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
