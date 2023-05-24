@@ -23,10 +23,6 @@ deploydocker:
         
 before_script:
   - cd ManagementService
-  - wget https://dot.net/v1/dotnet-install.sh
-  - bash ./dotnet-install.sh -c 7.0
-  - dotnet new xunit
-
 include:
   - template: Security/Dependency-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
@@ -34,3 +30,7 @@ include:
 sast:
   tags:
     - dock-runner
+  script:
+    - wget https://dot.net/v1/dotnet-install.sh
+    - bash ./dotnet-install.sh -c 7.0
+    - dotnet new xunit
