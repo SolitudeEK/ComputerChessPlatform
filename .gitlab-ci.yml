@@ -25,4 +25,4 @@ deploydocker:
         - ./build_services.bat
         
 include:
-  -local: '/analize.yml'
+   local: 'analize.gitlab-ci.yml'
