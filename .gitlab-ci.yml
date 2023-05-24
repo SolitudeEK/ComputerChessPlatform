@@ -25,4 +25,15 @@ deploydocker:
         - ./build_services.bat
         
 include:
-   local: 'analize.gitlab-ci.yml'
+  - template: Security/SAST.gitlab-ci.yml
+
+sast:
+  tags:
+    - dock-runner
+  before_script:
+    - wget https://dot.net/v1/dotnet-install.sh
+    - bash ./dotnet-install.sh -c 7.0
+    - dotnet new xunit
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
