@@ -3,6 +3,9 @@ stages:
     - inspect
     - deploydocker
 
+before_script:
+  - cd ManagementService
+
 test:
     stage: test
     script:
@@ -21,16 +24,6 @@ deploydocker:
     script:
         - ./build_services.bat
         
-before_script:
-  - cd ManagementService
 include:
   - template: Security/Dependency-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
-
-sast:
-  tags:
-    - dock-runner
-  script:
-    - wget https://dot.net/v1/dotnet-install.sh
-    - bash ./dotnet-install.sh -c 7.0
-    - dotnet new xunit
