@@ -23,6 +23,11 @@ deploydocker:
         
 before_script:
   - cd ManagementService
+
 include:
   - template: Security/Dependency-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
+
+sast:
+  tags:
+    - dock-runner
