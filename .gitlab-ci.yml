@@ -12,24 +12,21 @@ deploy:
         - docker compose up -d
 deploystoaks:
     stage: deploytoaks
-  variables:
-      AZ_1: $AZ_1
-      AZ_2: $AZ_2
-  image: mcr.microsoft.com/azure-cli
-  before_script:
-    - az login -u $AZ_2 -p $AZ_1 
-    - az account set --subscription 16637c6b-c620-4ad0-b15f-ec249037f8fb
-    - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-    - chmod +x kubectl
-    - mv kubectl /usr/local/bin/
-  script:
-    - az aks get-credentials --resource-group AKS_RG --name AKS-Chess
-    - cd k8s
-    - kubectl apply -f keycloak-sercret.yaml
-    - kubectl apply -f keycloak-config.yaml
-    - kubectl apply -f postgres-config.yaml
-    - kubectl apply -f postgres-secret.yaml
-    - kubectl apply -f postgres.yaml
-    - kubectl apply -f fron_end.yaml
-    - kubectl apply -f management.yaml
-    - kubectl apply -f game.yaml
+    image: mcr.microsoft.com/azure-cli
+    before_script:
+        - az login -u $AZ_2 -p $AZ_1 
+        - az account set --subscription 16637c6b-c620-4ad0-b15f-ec249037f8fb
+        - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        - chmod +x kubectl
+        - mv kubectl /usr/local/bin/
+    script:
+        - az aks get-credentials --resource-group AKS_RG --name AKS-Chess
+        - cd k8s
+        - kubectl apply -f keycloak-sercret.yaml
+        - kubectl apply -f keycloak-config.yaml
+        - kubectl apply -f postgres-config.yaml
+        - kubectl apply -f postgres-secret.yaml
+        - kubectl apply -f postgres.yaml
+        - kubectl apply -f fron_end.yaml
+        - kubectl apply -f management.yaml
+        - kubectl apply -f game.yaml
