@@ -8,7 +8,7 @@ test:
 deploystoaks:
     stage: deploytoaks
     tags:
-        - docker
+        - Docker
     image: microsoft/azure-cli:latest
     before_script:
         - az login -u $AZ_2 -p $AZ_1 
