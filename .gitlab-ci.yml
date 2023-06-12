@@ -9,4 +9,4 @@ deploystoaks:
     stage: deploytoaks
     script:
         - cd k8s
-        - kubectl apply -f game.yaml
+        - apply.bat
