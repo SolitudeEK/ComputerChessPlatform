@@ -1,15 +1,10 @@
 stages:
     - test
-    - deploy
     - deploytoaks
 test:
     stage: test
     script:
         - echo "integrated test"
-deploy:
-    stage: deploy
-    script:
-        - docker compose up -d
 deploystoaks:
     stage: deploytoaks
     image: mcr.microsoft.com/azure-cli
