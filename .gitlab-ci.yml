@@ -7,6 +7,17 @@ test:
         - echo "integrated test"
 deploystoaks:
     stage: deploytoaks
+    tags:
+        - Docker
+    image: mcr.microsoft.com/azure-cli
+    before_script:
+        - az login -u egorknz@gmail.com -p Versus14 --tenant cf427adc-4cb8-4bb6-b4dc-4995a1b7e470
+        - az account set --subscription 16637c6b-c620-4ad0-b15f-ec249037f8fb
+        - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        - chmod +x kubectl
+        - mv kubectl /usr/local/bin/
+        - az aks get-credentials --resource-group AKS_RG --name AKS-Chess
+
     script:
         - cd k8s
-        - ./apply.bat
+        - kubectl apply -f game.yaml
