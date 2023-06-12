@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reverseproxy-deployment
+  namespace: chess
+  labels:
+    app: reverseproxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reverseproxy
+  template:
+    metadata:
+      labels:
+        app: reverseproxy
+    spec:
+      containers:
+      - name: reverseproxy
+        image: nginx:1.25
+        ports:
+        - containerPort: 5001
+        - containerPort: 5002
+        - containerPort: 5003
+        - containerPort: 3000
+        volumeMounts:
+          - name: nginx-config
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reverseproxy-service
+  namespace: chess
+spec:
+  type: LoadBalancer
+  selector:
+    app: reverseproxy
+  ports:
+    - name: management-port
+      protocol: TCP
+      port: 5001
+      targetPort: 5001
+    - name: game-port
+      protocol: TCP
+      port: 5002
+      targetPort: 5002
+    - name: keycloak-port
+      protocol: TCP
+      port: 5003
+      targetPort: 5003
+    - name: frontend-port
+      protocol: TCP
+      port: 3000
+      targetPort: 3000      
+  clusterIP: 10.0.11.140

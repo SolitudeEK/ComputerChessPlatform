@@ -1,4 +1,3 @@
 {
-  "ads": "engines/stockfish.04-x86-64-avx2",
   "ssss": "engines/komodo.1-linux-bmi2"
 }

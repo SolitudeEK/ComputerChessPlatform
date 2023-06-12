@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: engine-volume
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: engine-volume
+  hostPath:
+    path: /data/engines/
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: engine-volume
+  namespace: chess
+  labels:
+    app: engine-volume
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: engine-volume

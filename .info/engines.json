@@ -1,5 +1,4 @@
 {
   "stockfish": "engines/stockfish.04-x86-64-avx2",
-  "komodo": "engines/komodo.1-linux-bmi2",
-  "test": "engines/test.1-linux-bmi2"
+  "komodo": "engines/komodo.1-linux-bmi2"
 }

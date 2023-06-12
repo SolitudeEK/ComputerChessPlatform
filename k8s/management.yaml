@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: management-deployment
+  namespace: chess
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: management
+  template:
+    metadata:
+      labels:
+        app: management
+    spec:
+      containers:
+        - name: management
+          image: solitudeanyway/management_s6:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5001
+          volumeMounts:
+            - name: info-volume
+              mountPath: /app/info
+            - name: engines-volume
+              mountPath: /app/engines
+      volumes:
+        - name: info-volume
+          persistentVolumeClaim:
+            claimName: configuration-volume
+        - name: engines-volume
+          persistentVolumeClaim:
+            claimName: engine-volume
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: management-service
+  namespace: chess
+spec:
+  type: ClusterIP
+  selector:
+    app: management
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001
+      nodePort: 30301
+      name: http
+  clusterIP: 10.0.165.151

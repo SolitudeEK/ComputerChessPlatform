@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-deployment
+  namespace: chess
+  labels:
+    app: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+      - name: keycloak
+        image: jboss/keycloak:16.1.1
+        ports:
+        - containerPort: 8080
+        env:
+          - name: DB_VENDOR
+            valueFrom:
+              configMapKeyRef:
+                name: keycloak-config
+                key: db-vendor
+          - name: DB_ADDR
+            valueFrom:
+              configMapKeyRef:
+                name: keycloak-config
+                key: db-addr
+          - name: DB_DATABSE
+            valueFrom:
+              configMapKeyRef:
+                name: postgres-config
+                key: postgres-db
+          - name: DB_SCHEMA
+            valueFrom:
+              configMapKeyRef:
+                name: keycloak-config
+                key: db-schema                
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: postgres-user
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: postgres-password
+          - name: KEYCLOAK_USER
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret
+                key: keycloak-user
+          - name: KEYCLOAK_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-secret
+                key: keycloak-password
+          - name: PROXY_ADDRESS_FORWARDING
+            value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak-service
+  namespace: chess
+spec:
+  type: LoadBalancer
+  selector:
+    app: keycloak
+  ports:
+    - protocol: TCP
+      port: 5003
+      targetPort: 8080
+  clusterIP: 10.0.11.132
