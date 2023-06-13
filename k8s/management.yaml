@@ -38,7 +38,6 @@ metadata:
   name: management-service
   namespace: chess
 spec:
-  type: ClusterIP
   selector:
     app: management
   ports:
