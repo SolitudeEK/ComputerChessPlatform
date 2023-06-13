@@ -21,7 +21,7 @@ deploystoaks:
     script:
         - cd k8s
         - kubectl apply -f game.yaml
-        - kubectl apply -f keycloak-sercret.yaml
+        - kubectl apply -f keycloak-secret.yaml
         - kubectl apply -f keycloak-config.yaml
         - kubectl apply -f postgres-config.yaml
         - kubectl apply -f postgres-secret.yaml
