@@ -28,6 +28,7 @@ metadata:
   name: frontend-service
   namespace: chess
 spec:
+  type: LoadBalancer
   selector:
     app: frontend
   ports:

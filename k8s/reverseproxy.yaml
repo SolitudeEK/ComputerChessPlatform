@@ -22,7 +22,6 @@ spec:
         - containerPort: 5001
         - containerPort: 5002
         - containerPort: 5003
-        - containerPort: 3000
         volumeMounts:
           - name: nginx-config
             mountPath: /etc/nginx/nginx.conf
@@ -53,9 +52,4 @@ spec:
     - name: keycloak-port
       protocol: TCP
       port: 5003
-      targetPort: 5003
-    - name: frontend-port
-      protocol: TCP
-      port: 3000
-      targetPort: 3000      
-  clusterIP: 10.0.11.140
+      targetPort: 5003     

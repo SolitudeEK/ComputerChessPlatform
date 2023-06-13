@@ -70,7 +70,6 @@ metadata:
   name: keycloak-service
   namespace: chess
 spec:
-  type: LoadBalancer
   selector:
     app: keycloak
   ports:
