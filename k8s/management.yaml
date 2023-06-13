@@ -44,6 +44,5 @@ spec:
     - protocol: TCP
       port: 5001
       targetPort: 5001
-      nodePort: 30301
       name: http
   clusterIP: 10.0.165.151
