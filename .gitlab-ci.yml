@@ -26,5 +26,5 @@ deploystoaks:
         - kubectl apply -f postgres-config.yaml
         - kubectl apply -f postgres-secret.yaml
         - kubectl apply -f postgres.yaml
-        - kubectl apply -f fron_end.yaml
+        - kubectl apply -f front_end.yaml
         - kubectl apply -f management.yaml
