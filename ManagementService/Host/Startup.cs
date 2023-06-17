@@ -23,7 +23,6 @@ namespace Host
         public void ConfigureServices(IServiceCollection services)
         {
             IdentityModelEventSource.ShowPII = true;
-            services.AddLogging();
             services.AddKeycloakAuthentication(Configuration, KeycloakAuthenticationOptions.Section, o => {
                 o.TokenValidationParameters.ValidIssuer = Configuration.GetSection("issuer").Value;
             });
@@ -62,8 +61,7 @@ namespace Host
                 options.AddPolicy(name: AllowOrigin,
                                   policy =>
                                   {
-                                      policy.WithOrigins("http://localhost:3000",
-                                                          "*")
+                                      policy.WithOrigins(Environment.GetEnvironmentVariable("ALLOWED_ORIGIN") ?? "http://localhost:3000")
                                       .AllowAnyHeader()
                                       .AllowAnyMethod();
                                   });
@@ -97,6 +95,7 @@ namespace Host
     {
         public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
         {
+            Console.WriteLine("Claiming");
             ClaimsIdentity claimsIdentity = (ClaimsIdentity)principal.Identity;
             if (claimsIdentity.IsAuthenticated && claimsIdentity.HasClaim((claim) => claim.Type == "realm_access"))
             {
@@ -106,7 +105,7 @@ namespace Host
                 {
                     foreach (var role in realmAccessAsDict["roles"])
                     {
-                        
+                        Console.WriteLine($"{role}");
                         claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role));
                     }
                 }

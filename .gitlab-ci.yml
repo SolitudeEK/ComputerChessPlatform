@@ -2,6 +2,7 @@ stages:
     - test
     - inspect
     - deploydocker
+    - test
 
 before_script:
   - cd ManagementService
@@ -29,7 +30,7 @@ include:
 
 sast:
   tags:
-    - dock-runner
+    - Docker
   before_script:
     - wget https://dot.net/v1/dotnet-install.sh
     - bash ./dotnet-install.sh -c 7.0
@@ -37,3 +38,11 @@ sast:
   artifacts:
     reports:
       sast: gl-sast-report.json
+
+snyk_test:
+  tags:
+    - Docker
+  stage: test
+  image: snyk/snyk:latest
+  script:
+    - snyk test
