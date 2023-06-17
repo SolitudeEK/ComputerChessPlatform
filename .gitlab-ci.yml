@@ -44,4 +44,5 @@ sast:
 snyk_test:
   script:
     - ./snyk.exe auth $SNYK_TOKEN
+    - dotnet build Host/Host.csproj
     - ./snyk.exe monitor --all-projects --org=e79a86d5-5461-42fe-95fc-12ccd74731fd
