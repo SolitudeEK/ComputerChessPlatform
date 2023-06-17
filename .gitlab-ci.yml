@@ -42,6 +42,8 @@ sast:
       sast: gl-sast-report.json
 
 snyk_test:
+  variables:
+   SNYK_TOKEN: "$SNYK_TOKEN"
   script:
     - cd ..
     - ./snyk.exe auth
