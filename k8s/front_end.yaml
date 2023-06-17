@@ -28,11 +28,10 @@ metadata:
   name: frontend-service
   namespace: chess
 spec:
-  type: LoadBalancer
   selector:
     app: frontend
   ports:
     - protocol: TCP
       port: 3000
       targetPort: 3000
-  clusterIP: 10.0.35.110
+  clusterIP: 10.0.35.111

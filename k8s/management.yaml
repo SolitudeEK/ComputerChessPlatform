@@ -4,7 +4,6 @@ metadata:
   name: management-deployment
   namespace: chess
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: management
@@ -19,11 +18,19 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 5001
+          env:
+            - name: ALLOWED_ORIGIN
+              value: "http://20.223.58.61:3000"
           volumeMounts:
             - name: info-volume
               mountPath: /app/info
             - name: engines-volume
               mountPath: /app/engines
+          resources: 
+            limits:
+              cpu: 300m
+            requests:
+              cpu: 150m
       volumes:
         - name: info-volume
           persistentVolumeClaim:
@@ -45,4 +52,4 @@ spec:
       port: 5001
       targetPort: 5001
       name: http
-  clusterIP: 10.0.165.151
+  clusterIP: 10.0.165.152

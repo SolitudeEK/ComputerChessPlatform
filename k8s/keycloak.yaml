@@ -70,10 +70,11 @@ metadata:
   name: keycloak-service
   namespace: chess
 spec:
+  type: LoadBalancer
   selector:
     app: keycloak
   ports:
     - protocol: TCP
       port: 5003
       targetPort: 8080
-  clusterIP: 10.0.11.132
+  clusterIP: 10.0.11.133

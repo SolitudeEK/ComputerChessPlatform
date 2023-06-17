@@ -4,7 +4,7 @@ metadata:
   name: game-deployment
   namespace: chess
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: game
@@ -18,7 +18,10 @@ spec:
           image: solitudeanyway/game_s6:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 5000
+            - containerPort: 5002
+          env:
+            - name: ALLOWED_ORIGIN
+              value: "http://20.223.58.61:3000"
           volumeMounts:
             - name: info-volume
               mountPath: /app/info
@@ -38,12 +41,10 @@ metadata:
   name: game-service
   namespace: chess
 spec:
-  type: NodePort
   selector:
     app: game
   ports:
     - protocol: TCP
-      port: 5000
-      targetPort: 5000
-      nodePort: 30302
+      port: 5002
+      targetPort: 5002
   clusterIP: 10.0.154.128
