@@ -3,6 +3,8 @@ stages:
     - inspect
     - deploydocker
     - test
+    - sast
+    - snyk_test
 
 before_script:
   - cd ManagementService
@@ -40,9 +42,5 @@ sast:
       sast: gl-sast-report.json
 
 snyk_test:
-  tags:
-    - Docker
-  stage: test
-  image: snyk/snyk:latest
   script:
-    - snyk test
+    - snyk monitor --all-projects --org=e79a86d5-5461-42fe-95fc-12ccd74731fd
